@@ -2,6 +2,7 @@ import { Table, Piece, Block } from "./useState/BoardState";
 import axios from "axios";
 
 export class ApiGateway {
+  private static gameId: number | null = null;
   public static async initializeGame(
     player1: string,
     player2: string
@@ -20,6 +21,7 @@ export class ApiGateway {
       playerData,
       { withCredentials: true }
     );
+    this.gameId = response.data.game_id;
     /* 
         デバッグ用メッセージ
         console.log("initialized");
