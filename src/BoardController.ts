@@ -17,11 +17,14 @@ export class ApiGateway {
     ];
     //todo リクエスト先をlocalhostから変更する
     const response = await axios.post(
-      "http://localhost:8000/start/",
+      "http://board-game-studio.net/start/",
       playerData,
       { withCredentials: true }
     );
-    this.gameId = response.data.game_id;
+    // if (response.data.game_id === null) {
+    //   throw new Error("game is not initialized");
+    // }
+    //this.gameId = response.data.game_id;
     /* 
         デバッグ用メッセージ
         console.log("initialized");
@@ -31,10 +34,20 @@ export class ApiGateway {
 
     return response.data;
   }
+  // public static async getGameStete(): Promise<Table> {
+  //   if (ApiGateway.gameId === null) {
+  //     throw new Error("game is not initialized");
+  //   }
+  //   const response = await axios.get(
+  //     `http://board-game-studio.net/game-state/${ApiGateway.gameId}`,
+  //     { withCredentials: true }
+  //   );
+  //   return response.data;
+  // }
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
     //全てのコマの初期位置が確定したらコマの位置情報をサーバーに送信する
     const response = await axios.post(
-      "http://localhost:8000/setup/",
+      "http://board-game-studio.net/setup/",
       tableInfo,
       { withCredentials: true }
     );
@@ -59,7 +72,7 @@ export class ApiGateway {
       destination: destination,
     };
     const response = await axios.post(
-      "http://localhost:8000/movement/",
+      "http://board-game-studio.net/movement/",
       movementInfo,
       { withCredentials: true }
     );
@@ -70,7 +83,7 @@ export class ApiGateway {
   }
   public static async cpuMovePiece(): Promise<Table> {
     const response = await axios.post(
-      "http://localhost:8000/cpu-movement/",
+      "http://board-game-studio.net/cpu-movement/",
       {},
       { withCredentials: true }
     );
