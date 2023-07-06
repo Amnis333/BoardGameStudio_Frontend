@@ -3,6 +3,9 @@ import axios from "axios";
 
 export class ApiGateway {
   private static gameId: number | null = null;
+  public static getGameId(): number | null {
+    return ApiGateway.gameId;
+  }
   public static async initializeGame(
     player1: string,
     player2: string
@@ -21,10 +24,10 @@ export class ApiGateway {
       playerData,
       { withCredentials: true }
     );
-    // if (response.data.game_id === null) {
-    //   throw new Error("game is not initialized");
-    // }
-    //this.gameId = response.data.game_id;
+    if (response.data.game_id === null) {
+      throw new Error("game is not initialized");
+    }
+    this.gameId = response.data.game_id;
     /* 
         デバッグ用メッセージ
         console.log("initialized");
@@ -34,16 +37,16 @@ export class ApiGateway {
 
     return response.data;
   }
-  // public static async getGameStete(): Promise<Table> {
-  //   if (ApiGateway.gameId === null) {
-  //     throw new Error("game is not initialized");
-  //   }
-  //   const response = await axios.get(
-  //     `http://localhost:8000/game-state/${ApiGateway.gameId}`,
-  //     { withCredentials: true }
-  //   );
-  //   return response.data;
-  // }
+  public static async getGameStete(): Promise<Table> {
+    if (ApiGateway.gameId === null) {
+      throw new Error("game is not initialized");
+    }
+    const response = await axios.get(
+      `http://localhost:8000/game-state/${ApiGateway.gameId}`,
+      { withCredentials: true }
+    );
+    return response.data;
+  }
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
     //全てのコマの初期位置が確定したらコマの位置情報をサーバーに送信する
     const response = await axios.post(

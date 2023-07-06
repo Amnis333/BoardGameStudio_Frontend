@@ -27,7 +27,7 @@ export interface Table {
   winner: string;
   table: Block[][];
   turn: number;
-  //gameId: number | null;
+  gameId: number | null;
 }
 
 export interface BoardProps {
