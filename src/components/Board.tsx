@@ -77,7 +77,7 @@ const BoardRow: React.FC<{
 
 const PickedPiecesArea: React.FC<{pieces: Piece[], player: Player}> = ({pieces, player}) => (
     <div className={styles.dFlex}>
-        {pieces.filter(piece => piece.owner === player.name).map((piece , index) => (
+        {pieces.map((piece , index) => (
             <img key={player.name + index} src={`../img/${piece.type}Ghost.jpeg`} className={styles.ghostImg} alt="pickedpieces"></img>
         ))}
     </div>

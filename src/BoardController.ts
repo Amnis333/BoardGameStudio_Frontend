@@ -27,7 +27,9 @@ export class ApiGateway {
     if (response.data.game_id === null) {
       throw new Error("game is not initialized");
     }
-    this.gameId = response.data.game_id;
+    ApiGateway.gameId = response.data.id;
+    console.log("game id is " + ApiGateway.gameId);
+    console.log(response.data, "res");
     /* 
         デバッグ用メッセージ
         console.log("initialized");
@@ -73,6 +75,7 @@ export class ApiGateway {
       player_piece: player_piece,
       piece_key: piece_key,
       destination: destination,
+      gameId: ApiGateway.gameId,
     };
     const response = await axios.post(
       "http://localhost:8000/movement/",
@@ -87,7 +90,9 @@ export class ApiGateway {
   public static async cpuMovePiece(): Promise<Table> {
     const response = await axios.post(
       "http://localhost:8000/cpu-movement/",
-      {},
+      {
+        gameId: ApiGateway.gameId,
+      },
       { withCredentials: true }
     );
     console.log("cpu moved");
