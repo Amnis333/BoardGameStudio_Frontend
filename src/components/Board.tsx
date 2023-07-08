@@ -114,6 +114,7 @@ const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
         winner: "",
         table: boardInfo,
         turn: 0,
+        gameId: ApiGateway.getGameId(),
       };
       console.log(gameData);
       ApiGateway.notifyGetReady(gameData).then((res) => {

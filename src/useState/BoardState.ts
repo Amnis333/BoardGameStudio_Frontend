@@ -27,6 +27,7 @@ export interface Table {
   winner: string;
   table: Block[][];
   turn: number;
+  gameId: number | null;
 }
 
 export interface BoardProps {
@@ -127,7 +128,7 @@ const useBoardState = (initialData: Table, playMode: string) => {
     setIsGameOver,
     winner,
     setWinner,
-    playerPickedPieces
+    playerPickedPieces,
   };
 };
 
