@@ -20,7 +20,7 @@ export class ApiGateway {
     ];
     //todo リクエスト先をlocalhostから変更する
     const response = await axios.post(
-      "http://localhost:8000/start/",
+      "https://board-game-studio.net/start/",
       playerData,
       { withCredentials: true }
     );
@@ -52,7 +52,7 @@ export class ApiGateway {
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
     //全てのコマの初期位置が確定したらコマの位置情報をサーバーに送信する
     const response = await axios.post(
-      "http://localhost:8000/setup/",
+      "https://board-game-studio.net/setup/",
       tableInfo,
       { withCredentials: true }
     );
@@ -78,7 +78,7 @@ export class ApiGateway {
       gameId: ApiGateway.gameId,
     };
     const response = await axios.post(
-      "http://localhost:8000/movement/",
+      "https://board-game-studio.net/movement/",
       movementInfo,
       { withCredentials: true }
     );
@@ -89,7 +89,7 @@ export class ApiGateway {
   }
   public static async cpuMovePiece(): Promise<Table> {
     const response = await axios.post(
-      "http://localhost:8000/cpu-movement/",
+      "https://board-game-studio.net/cpu-movement/",
       {
         gameId: ApiGateway.gameId,
       },
