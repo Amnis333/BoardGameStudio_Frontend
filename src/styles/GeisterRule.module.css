@@ -10,7 +10,7 @@
 }
 
 .buttonArea{
-    padding-top: 5rem;
+    padding-top: 1rem;
     display: flex;
     justify-content: space-around;
 }
@@ -39,8 +39,9 @@
     text-align: center;
 }
 
-.textColor{
+.text{
     color: white;
+    font-size: 1rem;
 }
 
 /* For Smartphones */
@@ -96,7 +97,7 @@
 /* For tablets */
 @media screen and (min-width: 768px) and (max-width: 912px) and (min-height: 1024px){
     .container{
-        padding-top: 15rem;
+        padding-top: 5rem;
         height: 100vh;
     }
     .button{
@@ -111,10 +112,13 @@
         height: 50%;
         text-align: center;
     }
+    .text{
+        font-size: 1.5rem;
+    }
 }
 
 /* For PCs(Laptop) */
-@media screen and (min-width: 913px) and (max-width: 1024px) and (min-height: 600px) and (max-height: 799px){
+@media screen and (min-width: 913px) and (max-width: 1440px) and (min-height: 600px) and (max-height: 900px){
     .container{
         padding: 2.5rem;
         height: 100vh;
@@ -132,13 +136,15 @@
         text-align: center;
     }
     .buttonArea{
-        padding-top: 2rem;
+        padding-top: 0.5rem;
+    }
+    .text{
+        font-size: 1.1rem;
     }
 }
 /* For PCs(Desktop) */
-@media screen and (min-width: 1025px) and (min-height: 800px) {
+@media screen and (min-width: 1441px) and (min-height: 901px) {
     .container{
-        padding: 6.5rem;
         height: 100vh;
     }
     .button{
@@ -152,5 +158,8 @@
         width: 40%;
         height: 40%;
         text-align: center;
+    }
+    .text{
+        font-size: 1.5rem;
     }
 }
