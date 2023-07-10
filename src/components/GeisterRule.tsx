@@ -37,34 +37,33 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.textColor}>
-        <h1>ガイスターのルール</h1>
-        <p>ガイスターは、2人で遊ぶボードゲームです。</p>
+        <h3>ガイスターのルール</h3>
         <p>ゲームの目的は、相手のゴーストを捕まえることです。</p>
         <p>
-          ゴーストは、赤と青の2色があります。ただし、相手のコマの種類はコマを取るまでわかりません。
+          ゴーストは、赤と青の2色があります。ただし、相手のゴーストの種類は捕まえるまでわかりません。
+        </p>
+        <div className={styles.imgContainer}>
+          <div>
+            <img src="../img/blueGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
+            <p className={styles.ghostName}>ゴースト（青）</p>
+          </div>
+          <div>
+            <img src="../img/redGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
+            <p className={styles.ghostName}>ゴースト（赤）</p>
+          </div>
+          <div>
+            <img src="../img/unknownGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
+            <p className={styles.ghostName}>ゴースト（敵）</p>
+          </div>
+        </div>
+        <p>
+          各プレイヤーから見て相手側の角のマスは脱出マスとなっています。
         </p>
         <p>
-          各プレイヤーは、青いオバケと赤いオバケのコマをそれぞれ4つずつ持っています。
+          自分の青ゴーストが脱出マスに到達し、その次のターンで取られなければ、そのゴーストはボードから脱出します。
         </p>
         <p>
-          ゲーム開始時に各プレイヤーは手前の8マスに8つの自分のコマを自由に配置します。
-        </p>
-        <p>配置が終わったら、先手のプレイヤーから交互にコマを1つ動かします。</p>
-        <p>コマは、自分のコマを1マス前後左右に動かすことができます。</p>
-        <p>
-          ただし、移動先に自分のコマがある時はその移動先には動かすことができません。
-        </p>
-        <p>
-          進めた先に相手のコマがある場合は、そのコマを取らなければなりません。
-        </p>
-        <p>
-          各プレイヤーから見て相手側の一番奥のマスは脱出マスとなっています。
-        </p>
-        <p>
-          自分のコマが脱出マスに到達し、その次のターンで相手に取られなければ、そのコマをボードから脱出させることができます。
-        </p>
-        <p>
-          勝利条件は、「相手の青いオバケを全て取る」「自分の赤いオバケを全て取らせる」「自分の青いオバケを1つでも脱出させる」のどれかを満たすことです。
+          勝利条件は、「相手の青ゴーストを全て取る」「自分の赤ゴーストを全て取らせる」「自分の青ゴーストを脱出させる」のどれかを満たすことです。
         </p>
       </div>
       <div className={styles.buttonArea}>
