@@ -36,7 +36,7 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.textColor}>
+      <div className={styles.text}>
         <h3>ガイスターのルール</h3>
         <p>ゲームの目的は、相手のゴーストを捕まえることです。</p>
         <p>
