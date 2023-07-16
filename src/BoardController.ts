@@ -44,7 +44,7 @@ export class ApiGateway {
       throw new Error("game is not initialized");
     }
     const response = await axios.get(
-      `http://localhost:8000/game-state/${ApiGateway.gameId}`,
+      `http://board-game-studio.net/game-state/${ApiGateway.gameId}`,
       { withCredentials: true }
     );
     return response.data;
@@ -52,7 +52,7 @@ export class ApiGateway {
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
     //全てのコマの初期位置が確定したらコマの位置情報をサーバーに送信する
     const response = await axios.post(
-      `http://localhost:8000/geister/${ApiGateway.gameId}/setup/`,
+      `http://board-game-studio.net/geister/${ApiGateway.gameId}/setup/`,
       tableInfo,
       { withCredentials: true }
     );
@@ -77,7 +77,7 @@ export class ApiGateway {
       destination: destination,
     };
     const response = await axios.post(
-      `http://localhost:8000/geister/${ApiGateway.gameId}/player-move/`,
+      `http://board-game-studio.net/geister/${ApiGateway.gameId}/player-move/`,
       movementInfo,
       { withCredentials: true }
     );
@@ -88,7 +88,7 @@ export class ApiGateway {
   }
   public static async cpuMovePiece(): Promise<Table> {
     const response = await axios.post(
-      `http://localhost:8000/geister/${ApiGateway.gameId}/cpu-move/`,
+      `http://board-game-studio.net/geister/${ApiGateway.gameId}/cpu-move/`,
       {},
       { withCredentials: true }
     );
