@@ -42,7 +42,7 @@ export class ApiGateway {
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
     //全てのコマの初期位置が確定したらコマの位置情報をサーバーに送信する
     const response = await axios.post(
-      `http://board-game-studio.net/geister/${ApiGateway.gameId}/setup/`,
+      `https://board-game-studio.net/geister/${ApiGateway.gameId}/setup/`,
       tableInfo,
       { withCredentials: true }
     );
@@ -67,7 +67,7 @@ export class ApiGateway {
       destination: destination,
     };
     const response = await axios.post(
-      `http://board-game-studio.net/geister/${ApiGateway.gameId}/player-move/`,
+      `https://board-game-studio.net/geister/${ApiGateway.gameId}/player-move/`,
       movementInfo,
       { withCredentials: true }
     );
@@ -78,7 +78,7 @@ export class ApiGateway {
   }
   public static async cpuMovePiece(): Promise<Table> {
     const response = await axios.post(
-      `http://board-game-studio.net/geister/${ApiGateway.gameId}/cpu-move/`,
+      `https://board-game-studio.net/geister/${ApiGateway.gameId}/cpu-move/`,
       {},
       { withCredentials: true }
     );
