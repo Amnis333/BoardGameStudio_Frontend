@@ -20,7 +20,7 @@ export class ApiGateway {
     ];
     //todo リクエスト先をlocalhostから変更する
     const response = await axios.post(
-      "https://board-game-studio.net/start/",
+      "https://board-game-studio.net/geister/start/",
       playerData,
       { withCredentials: true }
     );
@@ -37,16 +37,6 @@ export class ApiGateway {
         console.log("----------");
         */
 
-    return response.data;
-  }
-  public static async getGameStete(): Promise<Table> {
-    if (ApiGateway.gameId === null) {
-      throw new Error("game is not initialized");
-    }
-    const response = await axios.get(
-      `http://board-game-studio.net/game-state/${ApiGateway.gameId}`,
-      { withCredentials: true }
-    );
     return response.data;
   }
   public static async notifyGetReady(tableInfo: Table): Promise<Table> {
