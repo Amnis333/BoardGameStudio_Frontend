@@ -100,7 +100,7 @@ const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
     setIsGameOver,
     winner,
     setWinner,
-    playerPickedPieces
+    playerPickedPieces,
   } = useBoardState(initialData, playMode);
 
   React.useEffect(() => {
@@ -121,6 +121,7 @@ const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
         setPlayers(res.players);
         setBoardInfo(res.table);
         setIsGameStarted(true);
+        alert(`ゲームスタート！${players[0].name}の番です`);
       });
     }
   });

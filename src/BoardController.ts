@@ -20,7 +20,7 @@ export class ApiGateway {
     ];
     //todo リクエスト先をlocalhostから変更する
     const response = await axios.post(
-      "http://localhost:8000/geister/start/",
+      "https://board-game-studio.net/start/",
       playerData,
       { withCredentials: true }
     );
