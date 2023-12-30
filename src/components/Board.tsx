@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import styles from "../styles/Board.module.css";
 import { ApiGateway } from "../BoardController";
 import {
@@ -10,35 +10,7 @@ import {
 } from "../useState/BoardState";
 import useBoardState from "../useState/BoardState";
 import GameSetPopUp from "./GameSetPopUp";
-
-const InitialPieceDisplay: React.FC<{
-  pieces: Piece[];
-  player: Player;
-  handlePieceClick: Function;
-  isPlayer1: boolean;
-}> = ({ pieces, player, handlePieceClick, isPlayer1 }) => (
-  <div className={styles.dFlex}>
-    {Object.values(pieces)
-      .filter((piece) => piece.owner === player.name)
-      .map((piece, index) => (
-        <img
-          key={player.name + index}
-          src={
-            isPlayer1
-              ? `../img/unknownGhost.jpeg`
-              : `../img/${piece.type}Ghost.jpeg`
-          }
-          className={
-            isPlayer1
-              ? `${styles.ghostImg} ${styles.rotate}`
-              : `${styles.ghostImg}`
-          }
-          onClick={() => handlePieceClick(piece)}
-          alt="piece"
-        ></img>
-      ))}
-  </div>
-);
+import { InitialPieceDisplay } from "./InitialPieceDisplay";
 
 const BoardRow: React.FC<{
   row: Block[];
@@ -113,7 +85,7 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
     playerPickedPieces,
   } = useBoardState(initialData, playMode);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const allPiecesSet = playerUnsetPieces.every(
       (pieces) => pieces.length === 0
     );
@@ -136,7 +108,7 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
     }
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (turn === 1) {
       ApiGateway.cpuMovePiece().then((res) => {
         setPlayers(res.players);
@@ -156,8 +128,8 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
         <InitialPieceDisplay
           pieces={playerUnsetPieces[1]}
           player={initialData.players[1]}
-          handlePieceClick={handlePieceClick}
-          isPlayer1={true}
+          onPieceClick={handlePieceClick}
+          isCpu={true}
         />
         {
           <PickedPiecesArea
@@ -180,8 +152,8 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
         <InitialPieceDisplay
           pieces={playerUnsetPieces[0]}
           player={initialData.players[0]}
-          handlePieceClick={handlePieceClick}
-          isPlayer1={false}
+          onPieceClick={handlePieceClick}
+          isCpu={false}
         />
         {
           <PickedPiecesArea
