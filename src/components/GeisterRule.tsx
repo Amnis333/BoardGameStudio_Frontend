@@ -1,18 +1,18 @@
-import React from "react";
 import styles from "../styles/GeisterRule.module.css";
-import Lobby from "./Lobby";
-import Board from "./Board";
+import { Lobby } from "./Lobby";
+import { Board } from "./Board";
 import { Table } from "../useState/BoardState";
 import { ApiGateway } from "../BoardController";
 import { PlayContext } from "./PlayContext";
+import React, { useState, useContext } from "react";
 
 interface GeisterRuleProps {
   playMode: string;
 }
 const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
-  const [doesGoBack, setGoback] = React.useState(false);
-  const [initialTable, setInitialTable] = React.useState<Table | null>(null);
-  const playContext = React.useContext(PlayContext);
+  const [doesGoBack, setGoback] = useState(false);
+  const [initialTable, setInitialTable] = useState<Table | null>(null);
+  const playContext = useContext(PlayContext);
   const handleGoback = () => {
     setGoback(true);
   };
@@ -44,21 +44,31 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
         </p>
         <div className={styles.imgContainer}>
           <div>
-            <img src="../img/blueGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
-            <p className={styles.ghostName}>ゴースト（青）</p>
+            <img
+              src="../img/blueGhost.jpeg"
+              alt="blueGhost"
+              className={styles.imgSize}
+            ></img>
+            <p className="ghostName">ゴースト（青）</p>
           </div>
           <div>
-            <img src="../img/redGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
+            <img
+              src="../img/redGhost.jpeg"
+              alt="blueGhost"
+              className={styles.imgSize}
+            ></img>
             <p className={styles.ghostName}>ゴースト（赤）</p>
           </div>
           <div>
-            <img src="../img/unknownGhost.jpeg" alt="blueGhost" className={styles.imgSize}></img>
+            <img
+              src="../img/unknownGhost.jpeg"
+              alt="blueGhost"
+              className={styles.imgSize}
+            ></img>
             <p className={styles.ghostName}>ゴースト（敵）</p>
           </div>
         </div>
-        <p>
-          各プレイヤーから見て相手側の角のマスは脱出マスとなっています。
-        </p>
+        <p>各プレイヤーから見て相手側の角のマスは脱出マスとなっています。</p>
         <p>
           自分の青ゴーストが脱出マスに到達し、その次のターンで取られなければ、そのゴーストはボードから脱出します。
         </p>

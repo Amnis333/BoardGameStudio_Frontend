@@ -29,7 +29,9 @@ const InitialPieceDisplay: React.FC<{
               : `../img/${piece.type}Ghost.jpeg`
           }
           className={
-            isPlayer1 ? `${styles.ghostImg} ${styles.rotate}` : styles.ghostImg
+            isPlayer1
+              ? `${styles.ghostImg} ${styles.rotate}`
+              : `${styles.ghostImg}`
           }
           onClick={() => handlePieceClick(piece)}
           alt="piece"
@@ -64,8 +66,8 @@ const BoardRow: React.FC<{
             }
             className={
               square.piece.owner === "cpu"
-                ? `${styles.ghostImgSmall} ${styles.rotate}`
-                : styles.ghostImgSmall
+                ? `"ghostImgSmall" "rotate"`
+                : "ghostImgSmall"
             }
             alt="piece"
           />
@@ -75,15 +77,23 @@ const BoardRow: React.FC<{
   </div>
 );
 
-const PickedPiecesArea: React.FC<{pieces: Piece[], player: Player}> = ({pieces, player}) => (
-    <div className={styles.dFlex}>
-        {pieces.map((piece , index) => (
-            <img key={player.name + index} src={`../img/${piece.type}Ghost.jpeg`} className={styles.ghostImg} alt="pickedpieces"></img>
-        ))}
-    </div>
+const PickedPiecesArea: React.FC<{ pieces: Piece[]; player: Player }> = ({
+  pieces,
+  player,
+}) => (
+  <div className={styles.dFlex}>
+    {pieces.map((piece, index) => (
+      <img
+        key={player.name + index}
+        src={`../img/${piece.type}Ghost.jpeg`}
+        className={styles.ghostImg}
+        alt="pickedpieces"
+      ></img>
+    ))}
+  </div>
 );
 
-const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
+export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
   const {
     boardInfo,
     setBoardInfo,
@@ -149,7 +159,12 @@ const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
           handlePieceClick={handlePieceClick}
           isPlayer1={true}
         />
-        {<PickedPiecesArea pieces={playerPickedPieces[1]} player={initialData.players[1]}/>}
+        {
+          <PickedPiecesArea
+            pieces={playerPickedPieces[1]}
+            player={initialData.players[1]}
+          />
+        }
       </div>
       <div className={styles.board}>
         {boardInfo.map((row, row_i) => (
@@ -168,12 +183,15 @@ const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
           handlePieceClick={handlePieceClick}
           isPlayer1={false}
         />
-        {<PickedPiecesArea pieces={playerPickedPieces[0]} player={initialData.players[0]}/>}
+        {
+          <PickedPiecesArea
+            pieces={playerPickedPieces[0]}
+            player={initialData.players[0]}
+          />
+        }
       </div>
 
       {isGameOver && <GameSetPopUp winner={winner} />}
     </div>
   );
 };
-
-export default Board;

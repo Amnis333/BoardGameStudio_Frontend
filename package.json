@@ -23,11 +23,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite",
+    "build": "tsc --noEmit && vite build",
+    "serve": "vite preview",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "type": "module",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -47,7 +49,10 @@
     ]
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.43.0",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "vite": "^5.0.10",
+    "vite-tsconfig-paths": "^4.2.3"
   }
 }

@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "../styles/Lobby.module.css";
 import GeisterRule from "./GeisterRule";
 import { PlayContext } from "./PlayContext";
+import React from "react";
 
-const Lobby: React.FC = () => {
-  const [showGeisterRule, setGeisterRule] = React.useState<boolean>(false);
-  const [playMode, setPlayMode] = React.useState<string>("");
-  const playContext = React.useContext(PlayContext);
+export const Lobby: React.FC = () => {
+  const [showGeisterRule, setGeisterRule] = useState<boolean>(false);
+  const [playMode, setPlayMode] = useState<string>("");
+  const playContext = useContext(PlayContext);
 
   useEffect(() => {
     if (playContext && !playContext.doesPlay) {
@@ -33,5 +34,3 @@ const Lobby: React.FC = () => {
     </div>
   );
 };
-
-export default Lobby;
