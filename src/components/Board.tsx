@@ -1,53 +1,11 @@
 import { useEffect } from "react";
 import styles from "../styles/Board.module.css";
 import { ApiGateway } from "../BoardController";
-import {
-  Table,
-  Player,
-  Piece,
-  Block,
-  BoardProps,
-} from "../useState/BoardState";
+import { Table, Player, Piece, BoardProps } from "../useState/BoardState";
 import useBoardState from "../useState/BoardState";
 import GameSetPopUp from "./GameSetPopUp";
 import { InitialPieceDisplay } from "./InitialPieceDisplay";
-
-const BoardRow: React.FC<{
-  row: Block[];
-  handleBlockClick: Function;
-  handlePieceClick: Function;
-}> = ({ row, handleBlockClick }) => (
-  <div className={styles.row}>
-    {row.map((square, col_i) => (
-      <div
-        key={"col" + col_i}
-        className={styles.block}
-        onClick={() => handleBlockClick(square)}
-      >
-        {/*
-                todo
-                1. square.piece.owner === "cpu"とハードコードしているのをplayers[1]に直す
-                2. square.piece.ownerもisPlayer1などの変数にする
-                */}
-        {square.piece && (
-          <img
-            src={
-              square.piece.owner === "cpu"
-                ? `../img/unknownGhost.jpeg`
-                : `../img/${square.piece.type}Ghost.jpeg`
-            }
-            className={
-              square.piece.owner === "cpu"
-                ? `"ghostImgSmall" "rotate"`
-                : "ghostImgSmall"
-            }
-            alt="piece"
-          />
-        )}
-      </div>
-    ))}
-  </div>
-);
+import { BoardRow } from "./BoardRow";
 
 const PickedPiecesArea: React.FC<{ pieces: Piece[]; player: Player }> = ({
   pieces,
@@ -143,8 +101,8 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
           <BoardRow
             key={"row" + row_i}
             row={row}
-            handleBlockClick={handleBlockClick}
-            handlePieceClick={handlePieceClick}
+            onBlockClick={handleBlockClick}
+            onPieceClick={handlePieceClick}
           />
         ))}
       </div>
