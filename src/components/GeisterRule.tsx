@@ -9,7 +9,7 @@ import React, { useState, useContext } from "react";
 interface GeisterRuleProps {
   playMode: string;
 }
-const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
+export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
   const [doesGoBack, setGoback] = useState(false);
   const [initialTable, setInitialTable] = useState<Table | null>(null);
   const playContext = useContext(PlayContext);
@@ -45,7 +45,7 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
         <div className={styles.imgContainer}>
           <div>
             <img
-              src="../img/blueGhost.jpeg"
+              src="/public/img/blueGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>
@@ -53,7 +53,7 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
           </div>
           <div>
             <img
-              src="../img/redGhost.jpeg"
+              src="/public/img/redGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>
@@ -61,7 +61,7 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
           </div>
           <div>
             <img
-              src="../img/unknownGhost.jpeg"
+              src="/public/img/unknownGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>
@@ -87,5 +87,3 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
     </div>
   );
 };
-
-export default GeisterRule;

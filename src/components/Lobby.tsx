@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "../styles/Lobby.module.css";
-import GeisterRule from "./GeisterRule";
+import { GeisterRule } from "./GeisterRule";
 import { PlayContext } from "./PlayContext";
 import React from "react";
 
