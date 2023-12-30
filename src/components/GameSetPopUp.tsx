@@ -1,5 +1,5 @@
 import React from "react";
-import Lobby from "./Lobby";
+import { Lobby } from "./Lobby";
 import styles from "../styles/GameSetPopUp.module.css";
 import { PlayContext } from "./PlayContext";
 

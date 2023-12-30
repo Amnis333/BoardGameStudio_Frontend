@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Board.module.css";
+import styles from "../styles/Board.module.css";
 import { ApiGateway } from "../BoardController";
 import {
   Table,
@@ -17,7 +17,7 @@ const InitialPieceDisplay: React.FC<{
   handlePieceClick: Function;
   isPlayer1: boolean;
 }> = ({ pieces, player, handlePieceClick, isPlayer1 }) => (
-  <div className="dFlex">
+  <div className={styles.dFlex}>
     {Object.values(pieces)
       .filter((piece) => piece.owner === player.name)
       .map((piece, index) => (
@@ -28,7 +28,11 @@ const InitialPieceDisplay: React.FC<{
               ? `../img/unknownGhost.jpeg`
               : `../img/${piece.type}Ghost.jpeg`
           }
-          className={isPlayer1 ? `"ghostImg" "rotate"` : "ghostImg"}
+          className={
+            isPlayer1
+              ? `${styles.ghostImg} ${styles.rotate}`
+              : `${styles.ghostImg}`
+          }
           onClick={() => handlePieceClick(piece)}
           alt="piece"
         ></img>
@@ -41,11 +45,11 @@ const BoardRow: React.FC<{
   handleBlockClick: Function;
   handlePieceClick: Function;
 }> = ({ row, handleBlockClick }) => (
-  <div className="row">
+  <div className={styles.row}>
     {row.map((square, col_i) => (
       <div
         key={"col" + col_i}
-        className="block"
+        className={styles.block}
         onClick={() => handleBlockClick(square)}
       >
         {/*
@@ -77,12 +81,12 @@ const PickedPiecesArea: React.FC<{ pieces: Piece[]; player: Player }> = ({
   pieces,
   player,
 }) => (
-  <div className="dFlex">
+  <div className={styles.dFlex}>
     {pieces.map((piece, index) => (
       <img
         key={player.name + index}
         src={`../img/${piece.type}Ghost.jpeg`}
-        className="ghostImg"
+        className={styles.ghostImg}
         alt="pickedpieces"
       ></img>
     ))}
@@ -147,8 +151,8 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
   }, [turn, setTurn, setPlayers, setBoardInfo, setIsGameOver, setWinner]);
 
   return (
-    <div className="container">
-      <div className="capturedPiecesTop">
+    <div className={styles.container}>
+      <div className={styles.capturedPiecesTop}>
         <InitialPieceDisplay
           pieces={playerUnsetPieces[1]}
           player={initialData.players[1]}
@@ -162,7 +166,7 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
           />
         }
       </div>
-      <div className="board">
+      <div className={styles.board}>
         {boardInfo.map((row, row_i) => (
           <BoardRow
             key={"row" + row_i}
@@ -172,7 +176,7 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
           />
         ))}
       </div>
-      <div className="capturedPiecesBottom">
+      <div className={styles.capturedPiecesBottom}>
         <InitialPieceDisplay
           pieces={playerUnsetPieces[0]}
           player={initialData.players[0]}

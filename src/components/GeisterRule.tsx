@@ -1,4 +1,4 @@
-import "../styles/GeisterRule.module.css";
+import styles from "../styles/GeisterRule.module.css";
 import { Lobby } from "./Lobby";
 import { Board } from "./Board";
 import { Table } from "../useState/BoardState";
@@ -35,19 +35,19 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
     );
   }
   return (
-    <div className="container">
-      <div className="text">
+    <div className={styles.container}>
+      <div className={styles.text}>
         <h3>ガイスターのルール</h3>
         <p>ゲームの目的は、相手のゴーストを捕まえることです。</p>
         <p>
           ゴーストは、赤と青の2色があります。ただし、相手のゴーストの種類は捕まえるまでわかりません。
         </p>
-        <div className="imgContainer">
+        <div className={styles.imgContainer}>
           <div>
             <img
               src="../img/blueGhost.jpeg"
               alt="blueGhost"
-              className="imgSize"
+              className={styles.imgSize}
             ></img>
             <p className="ghostName">ゴースト（青）</p>
           </div>
@@ -55,17 +55,17 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
             <img
               src="../img/redGhost.jpeg"
               alt="blueGhost"
-              className="imgSize"
+              className={styles.imgSize}
             ></img>
-            <p className="ghostName">ゴースト（赤）</p>
+            <p className={styles.ghostName}>ゴースト（赤）</p>
           </div>
           <div>
             <img
               src="../img/unknownGhost.jpeg"
               alt="blueGhost"
-              className="imgSize"
+              className={styles.imgSize}
             ></img>
-            <p className="ghostName">ゴースト（敵）</p>
+            <p className={styles.ghostName}>ゴースト（敵）</p>
           </div>
         </div>
         <p>各プレイヤーから見て相手側の角のマスは脱出マスとなっています。</p>
@@ -76,11 +76,11 @@ const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
           勝利条件は、「相手の青ゴーストを全て取る」「自分の赤ゴーストを全て取らせる」「自分の青ゴーストを脱出させる」のどれかを満たすことです。
         </p>
       </div>
-      <div className="buttonArea">
-        <button className="button" onClick={handleGoback}>
+      <div className={styles.buttonArea}>
+        <button className={styles.button} onClick={handleGoback}>
           Go Back
         </button>
-        <button className="button" onClick={handlePlay}>
+        <button className={styles.button} onClick={handlePlay}>
           Play
         </button>
       </div>
