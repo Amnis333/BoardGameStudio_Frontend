@@ -1,27 +1,12 @@
 import { useEffect } from "react";
 import styles from "../styles/Board.module.css";
 import { ApiGateway } from "../BoardController";
-import { Table, Player, Piece, BoardProps } from "../useState/BoardState";
+import { Table, BoardProps } from "../useState/BoardState";
 import useBoardState from "../useState/BoardState";
 import GameSetPopUp from "./GameSetPopUp";
 import { InitialPieceDisplay } from "./InitialPieceDisplay";
 import { BoardRow } from "./BoardRow";
-
-const PickedPiecesArea: React.FC<{ pieces: Piece[]; player: Player }> = ({
-  pieces,
-  player,
-}) => (
-  <div className={styles.dFlex}>
-    {pieces.map((piece, index) => (
-      <img
-        key={player.name + index}
-        src={`../img/${piece.type}Ghost.jpeg`}
-        className={styles.ghostImg}
-        alt="pickedpieces"
-      ></img>
-    ))}
-  </div>
-);
+import { PickedPiecesArea } from "./PickedPiecesArea";
 
 export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
   const {
