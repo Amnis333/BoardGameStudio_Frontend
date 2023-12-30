@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import styles from "../styles/Lobby.module.css";
+import { useContext, useEffect, useState } from "react";
+import "../styles/Lobby.module.css";
 import GeisterRule from "./GeisterRule";
 import { PlayContext } from "./PlayContext";
+import React from "react";
 
-const Lobby: React.FC = () => {
-  const [showGeisterRule, setGeisterRule] = React.useState<boolean>(false);
-  const [playMode, setPlayMode] = React.useState<string>("");
-  const playContext = React.useContext(PlayContext);
+export const Lobby: React.FC = () => {
+  const [showGeisterRule, setGeisterRule] = useState<boolean>(false);
+  const [playMode, setPlayMode] = useState<string>("");
+  const playContext = useContext(PlayContext);
 
   useEffect(() => {
     if (playContext && !playContext.doesPlay) {
@@ -20,18 +21,12 @@ const Lobby: React.FC = () => {
   return showGeisterRule ? (
     <GeisterRule playMode={playMode} />
   ) : (
-    <div className={styles.container}>
-      <div className={styles.background}>
-        <button
-          className={styles.button}
-          id="single-mode-btn"
-          onClick={handleClick}
-        >
+    <div className="container">
+      <div className="background">
+        <button className="button" id="single-mode-btn" onClick={handleClick}>
           Play<br></br>(click here!)
         </button>
       </div>
     </div>
   );
 };
-
-export default Lobby;
