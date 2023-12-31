@@ -15,19 +15,17 @@ type Player = {
   pickedRedPiecesCount: number;
 };
 
-type InitialPieceDisplayProps = {
+type InitialPlayerPieceDisplayProps = {
   pieces: Piece[];
   player: Player;
-  isCpu: boolean;
   onPieceClick: (piece: Piece) => void;
 };
 
-export const InitialPieceDisplay = ({
+export const InitialPlayerPieceDisplay = ({
   pieces,
   player,
-  isCpu,
   onPieceClick,
-}: InitialPieceDisplayProps) => {
+}: InitialPlayerPieceDisplayProps) => {
   return (
     <div className={styles.dFlex}>
       {Object.values(pieces)
@@ -35,16 +33,8 @@ export const InitialPieceDisplay = ({
         .map((piece, index) => (
           <img
             key={player.name + index}
-            src={
-              isCpu
-                ? `/public/img/unknownGhost.jpeg`
-                : `/public/img/${piece.type}Ghost.jpeg`
-            }
-            className={
-              isCpu
-                ? `${styles.ghostImg} ${styles.rotate}`
-                : `${styles.ghostImg}`
-            }
+            src={`/public/img/${piece.type}Ghost.jpeg`}
+            className={`${styles.ghostImg}`}
             onClick={() => onPieceClick(piece)}
             alt="piece"
           ></img>

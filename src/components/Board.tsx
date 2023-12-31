@@ -4,11 +4,13 @@ import { ApiGateway } from "../BoardController";
 import { Table, BoardProps } from "../useState/BoardState";
 import useBoardState from "../useState/BoardState";
 import GameSetPopUp from "./GameSetPopUp";
-import { InitialPieceDisplay } from "./InitialPieceDisplay";
+import { InitialPlayerPieceDisplay } from "./InitialPlayerPieceDisplay";
 import { BoardRow } from "./BoardRow";
 import { PickedPiecesArea } from "./PickedPiecesArea";
 
 export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
+  const isOppenentCpu = initialData.players[1].name === "cpu";
+
   const {
     boardInfo,
     setBoardInfo,
@@ -68,12 +70,13 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
   return (
     <div className={styles.container}>
       <div className={styles.capturedPiecesTop}>
-        <InitialPieceDisplay
-          pieces={playerUnsetPieces[1]}
-          player={initialData.players[1]}
-          onPieceClick={handlePieceClick}
-          isCpu={true}
-        />
+        {!isOppenentCpu && (
+          <InitialPlayerPieceDisplay
+            pieces={playerUnsetPieces[1]}
+            player={initialData.players[1]}
+            onPieceClick={handlePieceClick}
+          />
+        )}
         {
           <PickedPiecesArea
             pieces={playerPickedPieces[1]}
@@ -92,11 +95,10 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
         ))}
       </div>
       <div className={styles.capturedPiecesBottom}>
-        <InitialPieceDisplay
+        <InitialPlayerPieceDisplay
           pieces={playerUnsetPieces[0]}
           player={initialData.players[0]}
           onPieceClick={handlePieceClick}
-          isCpu={false}
         />
         {
           <PickedPiecesArea
