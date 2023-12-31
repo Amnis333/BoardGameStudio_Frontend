@@ -16,29 +16,25 @@ type Player = {
 };
 
 type InitialPlayerPieceDisplayProps = {
-  pieces: Piece[];
   player: Player;
   onPieceClick: (piece: Piece) => void;
 };
 
 export const InitialPlayerPieceDisplay = ({
-  pieces,
   player,
   onPieceClick,
 }: InitialPlayerPieceDisplayProps) => {
   return (
     <div className={styles.dFlex}>
-      {Object.values(pieces)
-        .filter((piece) => piece.owner === player.name)
-        .map((piece, index) => (
-          <img
-            key={player.name + index}
-            src={`/public/img/${piece.type}Ghost.jpeg`}
-            className={`${styles.ghostImg}`}
-            onClick={() => onPieceClick(piece)}
-            alt="piece"
-          ></img>
-        ))}
+      {Object.values(player.pieces).map((piece, index) => (
+        <img
+          key={player.name + index}
+          src={`/img/${piece.type}Ghost.jpeg`}
+          className={`${styles.ghostImg}`}
+          onClick={() => onPieceClick(piece)}
+          alt="piece"
+        ></img>
+      ))}
     </div>
   );
 };

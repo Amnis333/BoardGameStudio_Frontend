@@ -9,7 +9,7 @@ import React, { useState, useContext } from "react";
 interface GeisterRuleProps {
   playMode: string;
 }
-export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
+export const GeisterRule = (props: GeisterRuleProps) => {
   const [doesGoBack, setGoback] = useState(false);
   const [initialTable, setInitialTable] = useState<Table | null>(null);
   const playContext = useContext(PlayContext);
@@ -30,9 +30,7 @@ export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
     if (initialTable === null) {
       throw new Error("initialTable is null");
     }
-    return (
-      <Board initialData={initialTable} playMode={GeisterRuleProps.playMode} />
-    );
+    return <Board initialData={initialTable} playMode={props.playMode} />;
   }
   return (
     <div className={styles.container}>
@@ -45,7 +43,7 @@ export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
         <div className={styles.imgContainer}>
           <div>
             <img
-              src="/public/img/blueGhost.jpeg"
+              src="/img/blueGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>
@@ -53,7 +51,7 @@ export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
           </div>
           <div>
             <img
-              src="/public/img/redGhost.jpeg"
+              src="/img/redGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>
@@ -61,7 +59,7 @@ export const GeisterRule: React.FC<GeisterRuleProps> = (GeisterRuleProps) => {
           </div>
           <div>
             <img
-              src="/public/img/unknownGhost.jpeg"
+              src="/img/unknownGhost.jpeg"
               alt="blueGhost"
               className={styles.imgSize}
             ></img>

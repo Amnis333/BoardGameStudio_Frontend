@@ -1,10 +1,11 @@
+import { Dispatch, SetStateAction } from "react";
 import { Player, Piece, Block } from "./BoardState";
 
 const useInitialPlacement = (
-  setBoardInfo: React.Dispatch<React.SetStateAction<Block[][]>>,
-  setPlayerPieces: React.Dispatch<React.SetStateAction<Piece[][]>>,
-  setPlayers: React.Dispatch<React.SetStateAction<Player[]>>,
-  setSelectedPiece: React.Dispatch<React.SetStateAction<Piece | null>>,
+  setBoardInfo: Dispatch<SetStateAction<Block[][]>>,
+  setPlayerPieces: Dispatch<SetStateAction<Piece[][]>>,
+  setPlayers: Dispatch<SetStateAction<Player[]>>,
+  setSelectedPiece: Dispatch<SetStateAction<Piece | undefined>>,
   players: Player[]
 ) => {
   const validateInitialPlacement = (selectedPiece: Piece, block: Block) => {
@@ -82,7 +83,7 @@ const useInitialPlacement = (
         }, {} as { [key: string]: Piece }),
       }))
     );
-    setSelectedPiece(null);
+    setSelectedPiece(undefined);
   };
   const initialPlacement = (selectedPiece: Piece, block: Block) => {
     if (!validateInitialPlacement(selectedPiece, block)) {

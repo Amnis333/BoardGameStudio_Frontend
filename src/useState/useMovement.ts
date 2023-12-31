@@ -1,17 +1,18 @@
 import { Player, Block, Piece } from "./BoardState";
 import { ApiGateway } from "../BoardController";
 import useValidateMovement from "./useValidateMovement";
+import { Dispatch, SetStateAction } from "react";
 
 const useMovement = (
   players: Player[],
-  setPlayers: React.Dispatch<React.SetStateAction<Player[]>>,
-  setSelectedPiece: React.Dispatch<React.SetStateAction<Piece | null>>,
-  setBoardInfo: React.Dispatch<React.SetStateAction<Block[][]>>,
-  setTurn: React.Dispatch<React.SetStateAction<number>>,
-  setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>,
-  setWinner: React.Dispatch<React.SetStateAction<string>>,
+  setPlayers: Dispatch<SetStateAction<Player[]>>,
+  setSelectedPiece: Dispatch<SetStateAction<Piece | undefined>>,
+  setBoardInfo: Dispatch<SetStateAction<Block[][]>>,
+  setTurn: Dispatch<SetStateAction<number>>,
+  setIsGameOver: Dispatch<SetStateAction<boolean>>,
+  setWinner: Dispatch<SetStateAction<string>>,
   playerPickedPieces: Piece[][],
-  setPlayerPickedPieces: React.Dispatch<React.SetStateAction<Piece[][]>>
+  setPlayerPickedPieces: Dispatch<SetStateAction<Piece[][]>>
 ) => {
   const useHandleMovement = (selectedPiece: Piece, block: Block) => {
     const validateMovement = useValidateMovement();
@@ -46,7 +47,7 @@ const useMovement = (
       board.map((row) =>
         row.map((b) => {
           if (b === block) return { ...b, piece: pieceOfPositionUpdated };
-          if (b.piece === selectedPiece) return { ...b, piece: null };
+          if (b.piece === selectedPiece) return { ...b, piece: undefined };
           return b;
         })
       )
@@ -86,7 +87,7 @@ const useMovement = (
     }
     if (selectedPieceKey === null) {
       alert("あなたのコマではないので動かせません");
-      setSelectedPiece(null);
+      setSelectedPiece(undefined);
       return;
     } else {
       ApiGateway.movePiece(selectedPiece, selectedPieceKey, block).then(
@@ -100,7 +101,7 @@ const useMovement = (
           }
         }
       );
-      setSelectedPiece(null);
+      setSelectedPiece(undefined);
     }
   };
   return useHandleMovement;
