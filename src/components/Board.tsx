@@ -9,8 +9,6 @@ import { BoardRow } from "./BoardRow";
 import { PickedPiecesArea } from "./PickedPiecesArea";
 
 export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
-  const isOppenentCpu = initialData.players[1].name === "cpu";
-
   const {
     boardInfo,
     setBoardInfo,
@@ -70,13 +68,6 @@ export const Board: React.FC<BoardProps> = ({ initialData, playMode }) => {
   return (
     <div className={styles.container}>
       <div className={styles.capturedPiecesTop}>
-        {!isOppenentCpu && (
-          <InitialPlayerPieceDisplay
-            pieces={playerUnsetPieces[1]}
-            player={initialData.players[1]}
-            onPieceClick={handlePieceClick}
-          />
-        )}
         {
           <PickedPiecesArea
             pieces={playerPickedPieces[1]}
