@@ -3,7 +3,7 @@ import styles from "../styles/Board.module.css";
 type Piece = {
   owner: string;
   type: string;
-  position: number[];
+  position: number[] | undefined;
 };
 
 type Player = {
@@ -26,15 +26,18 @@ export const InitialPlayerPieceDisplay = ({
 }: InitialPlayerPieceDisplayProps) => {
   return (
     <div className={styles.dFlex}>
-      {Object.values(player.pieces).map((piece, index) => (
-        <img
-          key={player.name + index}
-          src={`/img/${piece.type}Ghost.jpeg`}
-          className={`${styles.ghostImg}`}
-          onClick={() => onPieceClick(piece)}
-          alt="piece"
-        ></img>
-      ))}
+      {/* piecesのうち、positionがundefinedのものを表示する.map, filterを使う */}
+      {Object.values(player.pieces)
+        .filter((piece) => piece.position === undefined)
+        .map((piece, index) => (
+          <img
+            key={player.name + index}
+            src={`/img/${piece.type}Ghost.jpeg`}
+            className={`${styles.ghostImg}`}
+            onClick={() => onPieceClick(piece)}
+            alt="piece"
+          ></img>
+        ))}
     </div>
   );
 };

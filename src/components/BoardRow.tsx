@@ -3,7 +3,7 @@ import styles from "../styles/Board.module.css";
 type Piece = {
   owner: string;
   type: string;
-  position: number[];
+  position: number[] | undefined;
 };
 
 type Block = {
@@ -34,13 +34,13 @@ export const BoardRow = (props: BoardRowProps) => (
           <img
             src={
               square.piece.owner === "cpu"
-                ? `/public/img/unknownGhost.jpeg`
-                : `/public/img/${square.piece.type}Ghost.jpeg`
+                ? `/img/unknownGhost.jpeg`
+                : `/img/${square.piece.type}Ghost.jpeg`
             }
             className={
               square.piece.owner === "cpu"
-                ? `"ghostImgSmall" "rotate"`
-                : "ghostImgSmall"
+                ? `${styles.ghostImgSmall} ${styles.rotate}`
+                : `${styles.ghostImgSmall}`
             }
             alt="piece"
           />
