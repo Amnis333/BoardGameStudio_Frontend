@@ -12,6 +12,7 @@
     "@types/node": "^16.18.25",
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.3",
+    "BoardGameStudio_gRPC": "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC",
     "axios": "^1.4.0",
     "css-select": "^5.1.0",
     "nth-check": "^2.1.1",
