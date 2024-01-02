@@ -15,6 +15,7 @@
     "BoardGameStudio_gRPC": "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC",
     "axios": "^1.4.0",
     "css-select": "^5.1.0",
+    "grpc-web": "^1.5.0",
     "nth-check": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
