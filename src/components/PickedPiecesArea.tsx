@@ -3,7 +3,7 @@ import styles from "../styles/Board.module.css";
 type Piece = {
   owner: string;
   type: string;
-  position: number[];
+  position: number[] | undefined;
 };
 
 type Player = {

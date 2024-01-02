@@ -24,20 +24,21 @@ export const InitialPlayerPieceDisplay = ({
   player,
   onPieceClick,
 }: InitialPlayerPieceDisplayProps) => {
+  const unPlacedPieces = Object.values(player.pieces).filter(
+    (piece) => piece.position === undefined
+  );
+
   return (
     <div className={styles.dFlex}>
-      {/* piecesのうち、positionがundefinedのものを表示する.map, filterを使う */}
-      {Object.values(player.pieces)
-        .filter((piece) => piece.position === undefined)
-        .map((piece, index) => (
-          <img
-            key={player.name + index}
-            src={`/img/${piece.type}Ghost.jpeg`}
-            className={`${styles.ghostImg}`}
-            onClick={() => onPieceClick(piece)}
-            alt="piece"
-          ></img>
-        ))}
+      {unPlacedPieces.map((piece, index) => (
+        <img
+          key={player.name + index}
+          src={`/img/${piece.type}Ghost.jpeg`}
+          className={`${styles.ghostImg}`}
+          onClick={() => onPieceClick(piece)}
+          alt="piece"
+        ></img>
+      ))}
     </div>
   );
 };

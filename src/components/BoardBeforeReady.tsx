@@ -34,7 +34,7 @@ type Table = {
 type BoardBeforeReadyProps = {
   initialData: Table;
   playMode: string;
-  onGameReady?: () => void;
+  onGameReady: () => void;
 };
 
 export const BoardBeforeReady = ({
@@ -71,16 +71,31 @@ export const BoardBeforeReady = ({
         row.map((b) => (b === block ? { ...b, piece: newPiece } : b))
       )
     );
-    setPlayers((players) =>
-      players.map((player) => ({
+    setPlayers((prevPlayers) => {
+      const newPlayers = prevPlayers.map((player) => ({
         ...player,
         pieces: Object.entries(player.pieces).reduce((obj, [key, value]) => {
-          obj[key] = value === selectedPiece ? newPiece : value;
+          obj[key] = value === piece ? newPiece : value;
           return obj;
         }, {} as { [key: string]: Piece }),
-      }))
-    );
+      }));
+
+      // 新しいステートに基づいてチェックを実行
+      checkIfAllPiecesPlaced(newPlayers);
+      return newPlayers;
+    });
     setSelectedPiece(undefined);
+  };
+
+  const checkIfAllPiecesPlaced = (updatedPlayers: Player[]) => {
+    const allPlaced = Object.values(updatedPlayers[0].pieces).every(
+      (piece) => piece.position !== undefined
+    );
+
+    if (allPlaced) {
+      setTimeout(() => onGameReady(), 0); // 全てのピースが配置されていればゲームを開始する
+      console.log("Game Ready!");
+    }
   };
 
   const isValidSetInitialPlacement = (selectedPiece: Piece, block: Block) => {

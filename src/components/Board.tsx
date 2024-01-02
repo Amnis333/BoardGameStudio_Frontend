@@ -5,7 +5,7 @@ import { useState } from "react";
 type Piece = {
   owner: string;
   type: string;
-  position: number[];
+  position: number[] | undefined;
 };
 
 type Block = {
@@ -37,15 +37,24 @@ type BoardProps = {
 
 export const Board = ({ initialData, playMode }: BoardProps) => {
   const [isGameReady, setIsGameReady] = useState(false);
+  const [BoardState, setBoardState] = useState<Table>(initialData);
+
+  const handleSetGameReady = () => {
+    setIsGameReady(true);
+    // リクエストを送る
+    // setBoardState(res)
+    console.log("setIsGameReady(true);");
+  };
+
   return (
     <div>
       {isGameReady ? (
-        <BoardAfterReady initialData={initialData} playMode={playMode} />
+        <BoardAfterReady initialData={BoardState} playMode={playMode} />
       ) : (
         <BoardBeforeReady
-          initialData={initialData}
+          initialData={BoardState}
           playMode={playMode}
-          onGameReady={() => setIsGameReady(true)}
+          onGameReady={handleSetGameReady}
         />
       )}
     </div>

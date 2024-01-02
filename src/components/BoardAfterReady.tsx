@@ -1,16 +1,13 @@
-import { useEffect } from "react";
 import styles from "../styles/Board.module.css";
-import { ApiGateway } from "../BoardController";
-import useBoardState from "../useState/BoardState";
 import GameSetPopUp from "./GameSetPopUp";
-import { InitialPlayerPieceDisplay } from "./InitialPlayerPieceDisplay";
 import { BoardRow } from "./BoardRow";
 import { PickedPiecesArea } from "./PickedPiecesArea";
+import { useState } from "react";
 
 type Piece = {
   owner: string;
   type: string;
-  position: number[];
+  position: number[] | undefined;
 };
 
 type Block = {
@@ -41,48 +38,54 @@ type BoardProps = {
 };
 
 export const BoardAfterReady = ({ initialData, playMode }: BoardProps) => {
-  const {
-    boardInfo,
-    setBoardInfo,
-    playerUnsetPieces,
-    setPlayers,
-    handlePieceClick,
-    handleBlockClick,
-    turn,
-    setTurn,
-    isGameOver,
-    setIsGameOver,
-    winner,
-    setWinner,
-    playerPickedPieces,
-  } = useBoardState(initialData, playMode);
+  const [turn, setTurn] = useState(0);
+  const [selectedPiece, setSelectedPiece] = useState<Piece>();
+  const [players, setPlayers] = useState<Player[]>(initialData.players);
+  const [rows, setRows] = useState<Block[][]>(initialData.table);
+  const [pickedPieces, setPickedPieces] = useState<Piece[][]>([[], []]);
+  const handleCpuMove = () => {
+    // Cpuのターンの処理
+    //　リクエストを送る
+    // setPlayers(res.players);
+    // setBoardInfo(res.table);
+    // setTurn(res.turn);
+  };
 
-  useEffect(() => {
-    if (turn === 1) {
-      ApiGateway.cpuMovePiece().then((res) => {
-        setPlayers(res.players);
-        setBoardInfo(res.table);
-        setTurn(res.turn);
-        if (res.winner !== "") {
-          setIsGameOver(true);
-          setWinner(res.winner);
-        }
-      });
+  if (turn === 1) {
+    handleCpuMove();
+  }
+
+  const handlePieceClick = (piece: Piece) => {
+    if (players[turn].name !== piece.owner) {
+      alert(`今は${players[turn].name}のターンです`);
+      return;
     }
-  }, [turn, setTurn, setPlayers, setBoardInfo, setIsGameOver, setWinner]);
+    setSelectedPiece(piece);
+    console.log("Piece Selected!");
+  };
+
+  const handleBlockClick = (block: Block) => {
+    if (selectedPiece === undefined && block.piece !== undefined) {
+      handlePieceClick(block.piece);
+    } else if (selectedPiece === undefined) {
+      alert("コマを選択してください");
+      return;
+    } else {
+      handleMovement(selectedPiece, block);
+    }
+  };
+
+  const handleMovement = (piece: Piece, dest: Block) => {
+    const newPiece = { ...piece, position: dest.address };
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.capturedPiecesTop}>
-        {
-          <PickedPiecesArea
-            pieces={playerPickedPieces[1]}
-            player={initialData.players[1]}
-          />
-        }
+        {<PickedPiecesArea pieces={pickedPieces[1]} player={players[1]} />}
       </div>
       <div className={styles.board}>
-        {boardInfo.map((row, row_i) => (
+        {rows.map((row, row_i) => (
           <BoardRow
             key={"row" + row_i}
             row={row}
@@ -92,19 +95,10 @@ export const BoardAfterReady = ({ initialData, playMode }: BoardProps) => {
         ))}
       </div>
       <div className={styles.capturedPiecesBottom}>
-        <InitialPlayerPieceDisplay
-          player={initialData.players[0]}
-          onPieceClick={handlePieceClick}
-        />
-        {
-          <PickedPiecesArea
-            pieces={playerPickedPieces[0]}
-            player={initialData.players[0]}
-          />
-        }
+        {<PickedPiecesArea pieces={pickedPieces[0]} player={players[0]} />}
       </div>
 
-      {isGameOver && <GameSetPopUp winner={winner} />}
+      {/* {isGameOver && <GameSetPopUp winner={winner} />} */}
     </div>
   );
 };
