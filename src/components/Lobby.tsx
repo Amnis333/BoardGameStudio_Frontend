@@ -6,7 +6,6 @@ import React from "react";
 
 export const Lobby: React.FC = () => {
   const [showGeisterRule, setGeisterRule] = useState<boolean>(false);
-  const [playMode, setPlayMode] = useState<string>("");
   const playContext = useContext(PlayContext);
 
   useEffect(() => {
@@ -16,10 +15,9 @@ export const Lobby: React.FC = () => {
   }, [playContext]);
   const handleClick = () => {
     setGeisterRule(true);
-    setPlayMode("vscpu");
   };
   return showGeisterRule ? (
-    <GeisterRule playMode={playMode} />
+    <GeisterRule />
   ) : (
     <div className={styles.container}>
       <div className={styles.background}>
