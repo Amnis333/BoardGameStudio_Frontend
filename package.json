@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@koheimatsuno99/boardgamestudio-grpc": "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC",
     "@svgr/plugin-svgo": "^7.0.0",
     "@svgr/webpack": "^7.0.0",
     "@tanstack/react-query": "^5.17.0",
@@ -14,7 +15,6 @@
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.3",
     "axios": "^1.4.0",
-    "boardgamestudio-grpc": "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC",
     "css-select": "^5.1.0",
     "google-protobuf": "^3.21.2",
     "grpc-web": "^1.5.0",

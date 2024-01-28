@@ -1989,6 +1989,10 @@
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
+"@koheimatsuno99/boardgamestudio-grpc@https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC":
+  version "1.0.0"
+  resolved "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC#4fceb7ea7cd9f0149319a00aa68f71dbe473d94c"
+
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
@@ -4978,10 +4982,6 @@ bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
-
-"boardgamestudio-grpc@https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC":
-  version "1.0.0"
-  resolved "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC#63449cf149014521b4f5e19bb1d0a2123a0cbd67"
 
 body-parser@1.20.1:
   version "1.20.1"

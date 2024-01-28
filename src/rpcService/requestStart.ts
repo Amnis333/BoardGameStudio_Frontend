@@ -1,5 +1,5 @@
-import { GeisterServiceClient } from "boardgamestudio-grpc/pkg/geister/client/geister_service_grpc_web_pb";
-import { StartRequest } from "boardgamestudio-grpc/pkg/geister/client/geister_service_pb";
+import { GeisterServiceClient } from "@koheimatsuno99/boardgamestudio-grpc/pkg/geister/client/geister_service_grpc_web_pb";
+import { StartRequest } from "@koheimatsuno99/boardgamestudio-grpc/pkg/geister/client/geister_service_pb";
 import { RequestStart } from "../hooks/useStart";
 
 const hostName = import.meta.env.VITE_CLIENT_URL_LOCAL;
