@@ -6,7 +6,7 @@ import { BoardRow } from "./BoardRow";
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Block = {
@@ -28,12 +28,11 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: number | null;
+  gameId: string;
 };
 
 type BoardBeforeReadyProps = {
   initialData: Table;
-  playMode: string;
   onGameReady: () => void;
 };
 
@@ -89,7 +88,7 @@ export const BoardBeforeReady = ({
 
   const checkIfAllPiecesPlaced = (updatedPlayers: Player[]) => {
     const allPlaced = Object.values(updatedPlayers[0].pieces).every(
-      (piece) => piece.position !== undefined
+      (piece) => piece.position.length === 2
     );
 
     if (allPlaced) {
@@ -107,7 +106,7 @@ export const BoardBeforeReady = ({
       alert("そのマスにはコマがすでに存在します");
       return false;
     }
-    if (selectedPiece.position !== undefined) {
+    if (selectedPiece.position.length === 2) {
       alert("そのコマはすでに配置されています。残りのコマを配置してください。");
       return false;
     }

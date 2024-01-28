@@ -156,7 +156,7 @@ const meta: Meta<typeof BoardBeforeReady> = {
         ],
       ],
       turn: 0,
-      gameId: null,
+      gameId: "gameId",
     },
   },
 };

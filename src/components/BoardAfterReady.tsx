@@ -7,7 +7,7 @@ import { useState } from "react";
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Block = {
@@ -29,15 +29,14 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: number | null;
+  gameId: string;
 };
 
 type BoardProps = {
   initialData: Table;
-  playMode: string;
 };
 
-export const BoardAfterReady = ({ initialData, playMode }: BoardProps) => {
+export const BoardAfterReady = ({ initialData }: BoardProps) => {
   const [turn, setTurn] = useState(0);
   const [selectedPiece, setSelectedPiece] = useState<Piece>();
   const [players, setPlayers] = useState<Player[]>(initialData.players);

@@ -156,7 +156,7 @@ const meta: Meta<typeof Board> = {
         ],
       ],
       turn: 0,
-      gameId: null,
+      gameId: "gameId",
     },
   },
 };

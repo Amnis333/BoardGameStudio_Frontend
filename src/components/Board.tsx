@@ -5,7 +5,7 @@ import { useState } from "react";
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Block = {
@@ -27,33 +27,29 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: number | null;
+  gameId: string;
 };
 
 type BoardProps = {
   initialData: Table;
-  playMode: string;
 };
 
-export const Board = ({ initialData, playMode }: BoardProps) => {
+export const Board = ({ initialData }: BoardProps) => {
   const [isGameReady, setIsGameReady] = useState(false);
   const [BoardState, setBoardState] = useState<Table>(initialData);
 
-  const handleSetGameReady = () => {
+  const handleSetGameReady = async () => {
     setIsGameReady(true);
     // リクエストを送る
-    // setBoardState(res)
-    console.log("setIsGameReady(true);");
   };
 
   return (
     <div>
       {isGameReady ? (
-        <BoardAfterReady initialData={BoardState} playMode={playMode} />
+        <BoardAfterReady initialData={BoardState} />
       ) : (
         <BoardBeforeReady
           initialData={BoardState}
-          playMode={playMode}
           onGameReady={handleSetGameReady}
         />
       )}

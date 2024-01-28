@@ -3,7 +3,7 @@ import styles from "../styles/Board.module.css";
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Player = {
@@ -25,7 +25,7 @@ export const InitialPlayerPieceDisplay = ({
   onPieceClick,
 }: InitialPlayerPieceDisplayProps) => {
   const unPlacedPieces = Object.values(player.pieces).filter(
-    (piece) => piece.position === undefined
+    (piece) => piece.position.length === 0
   );
 
   return (

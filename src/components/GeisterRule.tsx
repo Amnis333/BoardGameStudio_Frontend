@@ -1,36 +1,68 @@
 import styles from "../styles/GeisterRule.module.css";
 import { Lobby } from "./Lobby";
 import { Board } from "./Board";
-import { Table } from "../useState/BoardState";
-import { ApiGateway } from "../BoardController";
 import { PlayContext } from "./PlayContext";
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
+import { requestStart } from "../rpcService/requestStart";
 
-interface GeisterRuleProps {
-  playMode: string;
-}
-export const GeisterRule = (props: GeisterRuleProps) => {
+type Piece = {
+  owner: string;
+  type: string;
+  position: number[];
+};
+
+type Block = {
+  address: number[];
+  piece: Piece | undefined;
+};
+
+type Player = {
+  name: string;
+  pieces: {
+    [key: string]: Piece;
+  };
+  pickedBluePiecesCount: number;
+  pickedRedPiecesCount: number;
+};
+
+type Table = {
+  players: Player[];
+  table: Block[][];
+  winner: string;
+  turn: number;
+  gameId: string;
+};
+
+export const GeisterRule = () => {
   const [doesGoBack, setGoback] = useState(false);
-  const [initialTable, setInitialTable] = useState<Table | null>(null);
+  const [initialTable, setInitialTable] = useState<Table>();
   const playContext = useContext(PlayContext);
+
   const handleGoback = () => {
     setGoback(true);
   };
+
   const handlePlay = async () => {
-    const initialData = await ApiGateway.initializeGame("you", "cpu");
-    setInitialTable(initialData);
+    const data = await requestStart({
+      player1Name: "player1",
+      player2Name: "player2",
+    });
+    setInitialTable(data);
+
     if (playContext) {
       playContext.setDoesPlay(true);
     }
   };
+
   if (doesGoBack) {
     return <Lobby />;
   }
+
   if (playContext && playContext.doesPlay) {
-    if (initialTable === null) {
-      throw new Error("initialTable is null");
+    if (initialTable === undefined) {
+      throw new Error("initialTable is undefined");
     }
-    return <Board initialData={initialTable} playMode={props.playMode} />;
+    return <Board initialData={initialTable} />;
   }
   return (
     <div className={styles.container}>

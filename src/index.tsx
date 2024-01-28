@@ -3,15 +3,20 @@ import ReactDOM from "react-dom/client";
 import { Lobby } from "./components/Lobby";
 import reportWebVitals from "./reportWebVitals";
 import { PlayProvider } from "./components/PlayContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <PlayProvider>
-      <Lobby />
-    </PlayProvider>
+    <QueryClientProvider client={queryClient}>
+      <PlayProvider>
+        <Lobby />
+      </PlayProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

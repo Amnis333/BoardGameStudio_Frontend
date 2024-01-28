@@ -8,7 +8,7 @@ type StartParams = {
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Block = {

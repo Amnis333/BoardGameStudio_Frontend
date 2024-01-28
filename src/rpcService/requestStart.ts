@@ -11,7 +11,7 @@ const geisterClient = new GeisterServiceClient(hostName);
 type Piece = {
   owner: string;
   type: string;
-  position: number[] | undefined;
+  position: number[];
 };
 
 type Block = {
