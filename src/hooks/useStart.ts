@@ -17,6 +17,7 @@ type Block = {
 };
 
 type Player = {
+  playerUuid: string;
   name: string;
   pieces: {
     [key: string]: Piece;
@@ -30,7 +31,7 @@ type Table = {
   table: Block[][];
   winner: string;
   turn: number;
-  gameId: string;
+  tableUuid: string;
 };
 
 export type RequestStart = (params: StartParams) => Promise<Table>;

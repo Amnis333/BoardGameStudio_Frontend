@@ -3,6 +3,9 @@ import GameSetPopUp from "./GameSetPopUp";
 import { BoardRow } from "./BoardRow";
 import { PickedPiecesArea } from "./PickedPiecesArea";
 import { useState } from "react";
+import { requestUpdateGameStateByCpuMovement } from "../rpcService/requestUpdateGameStateByCpuMovement";
+import { requestGetGameState } from "../rpcService/requestGetGameState";
+import { requestUpdateGameStateByPlayerMovement } from "../rpcService/requestUpdateGameStateByPlayerMovement";
 
 type Piece = {
   owner: string;
@@ -29,7 +32,7 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: string;
+  tableUuid: string;
 };
 
 type BoardProps = {
@@ -42,12 +45,14 @@ export const BoardAfterReady = ({ initialData }: BoardProps) => {
   const [players, setPlayers] = useState<Player[]>(initialData.players);
   const [rows, setRows] = useState<Block[][]>(initialData.table);
   const [pickedPieces, setPickedPieces] = useState<Piece[][]>([[], []]);
-  const handleCpuMove = () => {
+  const handleCpuMove = async () => {
     // Cpuのターンの処理
     //　リクエストを送る
-    // setPlayers(res.players);
-    // setBoardInfo(res.table);
-    // setTurn(res.turn);
+    await requestUpdateGameStateByCpuMovement(initialData.tableUuid);
+    const res = await requestGetGameState(initialData.tableUuid);
+    setPlayers(res.players);
+    setRows(res.table);
+    setTurn(res.turn);
   };
 
   if (turn === 1) {
@@ -74,8 +79,17 @@ export const BoardAfterReady = ({ initialData }: BoardProps) => {
     }
   };
 
-  const handleMovement = (piece: Piece, dest: Block) => {
+  const handleMovement = async (piece: Piece, dest: Block) => {
     const newPiece = { ...piece, position: dest.address };
+    await requestUpdateGameStateByPlayerMovement(
+      initialData.tableUuid,
+      "", // pieceKey
+      dest
+    );
+    const res = await requestGetGameState(initialData.tableUuid);
+    setTurn(res.turn);
+    setPlayers(res.players);
+    setRows(res.table);
   };
 
   return (

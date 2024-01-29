@@ -1,6 +1,5 @@
 import { GeisterServiceClient } from "@koheimatsuno99/boardgamestudio-grpc/pkg/geister/client/geister_service_grpc_web_pb";
-import { StartRequest } from "@koheimatsuno99/boardgamestudio-grpc/pkg/geister/client/geister_service_pb";
-import { RequestStart } from "../hooks/useStart";
+import { GetGameStateRequest } from "@koheimatsuno99/boardgamestudio-grpc/pkg/geister/client/geister_service_pb";
 
 const hostName = import.meta.env.VITE_CLIENT_URL_LOCAL;
 if (!hostName) {
@@ -20,7 +19,6 @@ type Block = {
 };
 
 type Player = {
-  playerUuid: string;
   name: string;
   pieces: {
     [key: string]: Piece;
@@ -37,12 +35,13 @@ type Table = {
   tableUuid: string;
 };
 
-export const requestStart: RequestStart = async (params) => {
+type RequestGetGameState = (tableUuid: string) => Promise<Table>;
+
+export const requestGetGameState: RequestGetGameState = async (tableUuid) => {
   return new Promise((resolve, reject) => {
-    const req = new StartRequest();
-    req.setPlayer1Name(params.player1Name);
-    req.setPlayer2Name(params.player2Name);
-    geisterClient.start(req, {}, (err, res) => {
+    const req = new GetGameStateRequest();
+    req.setTableUuid(tableUuid);
+    geisterClient.getGameState(req, {}, (err, res) => {
       if (err) {
         console.log(err);
         reject(err);
@@ -63,41 +62,37 @@ export const requestStart: RequestStart = async (params) => {
               position: pieceObj.positionList,
             };
           });
-          // playerObjをPlayer型に変換します
           return {
-            playerUuid: playerObj.playerUuid,
             name: playerObj.name,
             pieces: pieces,
             pickedBluePiecesCount: playerObj.pickedbluepiecescount,
             pickedRedPiecesCount: playerObj.pickedredpiecescount,
           };
         });
-
-        const rows: Block[][] = gameStateObj.boardList.map((blockRow) => {
-          // blockRowをBlock[]型に変換します
-          return blockRow.blocksList.map((blockObj) => {
-            // blockObjをBlock型に変換します
+        const table: Block[][] = gameStateObj.boardList.map((row) => {
+          return row.blocksList.map((blockObj) => {
+            const pieceObj = blockObj.piece;
+            let piece: Piece | undefined = undefined;
+            if (pieceObj !== undefined) {
+              piece = {
+                owner: pieceObj.owner,
+                type: pieceObj.pieceType,
+                position: pieceObj.positionList,
+              };
+            }
             return {
               address: blockObj.addressList,
-              piece: blockObj.piece
-                ? {
-                    owner: blockObj.piece.owner,
-                    type: blockObj.piece.pieceType,
-                    position: blockObj.piece.positionList,
-                  }
-                : undefined,
+              piece: piece,
             };
           });
         });
-
-        const table: Table = {
+        resolve({
           players: players,
-          table: rows,
+          table: table,
           winner: "",
           turn: gameStateObj.turn,
           tableUuid: gameStateObj.tableUuid,
-        };
-        resolve(table);
+        });
       }
     });
   });

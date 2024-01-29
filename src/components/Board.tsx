@@ -1,6 +1,7 @@
 import { BoardBeforeReady } from "./BoardBeforeReady";
 import { BoardAfterReady } from "./BoardAfterReady";
 import { useState } from "react";
+import { requestNotifyGamePreparationComplete } from "../rpcService/requestNotifyGamePreparationComplete";
 
 type Piece = {
   owner: string;
@@ -14,6 +15,7 @@ type Block = {
 };
 
 type Player = {
+  playerUuid: string;
   name: string;
   pieces: {
     [key: string]: Piece;
@@ -27,7 +29,7 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: string;
+  tableUuid: string;
 };
 
 type BoardProps = {
@@ -38,9 +40,20 @@ export const Board = ({ initialData }: BoardProps) => {
   const [isGameReady, setIsGameReady] = useState(false);
   const [BoardState, setBoardState] = useState<Table>(initialData);
 
-  const handleSetGameReady = async () => {
+  const handleSetGameReady = async (rows: Block[][], players: Player[]) => {
     setIsGameReady(true);
-    // リクエストを送る
+    setBoardState((prevState) => ({
+      ...prevState,
+      table: rows,
+      players: players,
+    }));
+
+    await requestNotifyGamePreparationComplete(
+      initialData.tableUuid,
+      rows,
+      players
+    );
+    alert(`ゲームを開始します.${BoardState.players[0].name}のターンです}`);
   };
 
   return (

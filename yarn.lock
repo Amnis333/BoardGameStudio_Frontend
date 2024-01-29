@@ -1991,7 +1991,7 @@
 
 "@koheimatsuno99/boardgamestudio-grpc@https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC":
   version "1.0.0"
-  resolved "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC#4fceb7ea7cd9f0149319a00aa68f71dbe473d94c"
+  resolved "https://github.com/KoheiMatsuno99/BoardGameStudio_gRPC#c6d7090173a67d524c69f1615ec93c28d65716bb"
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"

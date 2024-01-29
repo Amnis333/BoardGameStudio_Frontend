@@ -8,53 +8,55 @@ const meta: Meta<typeof BoardBeforeReady> = {
     initialData: {
       players: [
         {
+          playerUuid: "player1Uuid",
           name: "player1",
           pieces: {
             piece1: {
               owner: "player1",
               type: "blue",
-              position: undefined,
+              position: [],
             },
             piece2: {
               owner: "player1",
               type: "red",
-              position: undefined,
+              position: [],
             },
             piece3: {
               owner: "player1",
               type: "blue",
-              position: undefined,
+              position: [],
             },
             piece4: {
               owner: "player1",
               type: "red",
-              position: undefined,
+              position: [],
             },
             piece5: {
               owner: "player1",
               type: "blue",
-              position: undefined,
+              position: [],
             },
             piece6: {
               owner: "player1",
               type: "red",
-              position: undefined,
+              position: [],
             },
             piece7: {
               owner: "player1",
               type: "blue",
-              position: undefined,
+              position: [],
             },
             piece8: {
               owner: "player1",
               type: "red",
-              position: undefined,
+              position: [],
             },
           },
           pickedBluePiecesCount: 0,
           pickedRedPiecesCount: 0,
         },
         {
+          playerUuid: "player2Uuid",
           name: "player2",
           pieces: {
             piece1: {
@@ -156,7 +158,7 @@ const meta: Meta<typeof BoardBeforeReady> = {
         ],
       ],
       turn: 0,
-      gameId: "gameId",
+      tableUuid: "tableUuid",
     },
   },
 };

@@ -15,6 +15,7 @@ type Block = {
 };
 
 type Player = {
+  playerUuid: string;
   name: string;
   pieces: {
     [key: string]: Piece;
@@ -28,12 +29,12 @@ type Table = {
   winner: string;
   table: Block[][];
   turn: number;
-  gameId: string;
+  tableUuid: string;
 };
 
 type BoardBeforeReadyProps = {
   initialData: Table;
-  onGameReady: () => void;
+  onGameReady: (rows: Block[][], players: Player[]) => void;
 };
 
 export const BoardBeforeReady = ({
@@ -92,7 +93,7 @@ export const BoardBeforeReady = ({
     );
 
     if (allPlaced) {
-      setTimeout(() => onGameReady(), 0); // 全てのピースが配置されていればゲームを開始する
+      setTimeout(() => onGameReady(rows, players), 0); // 全てのピースが配置されていればゲームを開始する
       console.log("Game Ready!");
     }
   };
@@ -111,10 +112,10 @@ export const BoardBeforeReady = ({
       return false;
     }
     const playerIndex = players.findIndex(
-      (player) => player.name === selectedPiece.owner
+      (player) => player.playerUuid === selectedPiece.owner
     );
     if (playerIndex === -1) {
-      alert("そのコマはすでに配置されています。残りのコマを配置してください。");
+      alert("そのコマは相手のコマです");
       return false;
     }
     const validPlacementRange = [
